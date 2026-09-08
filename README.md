@@ -9,9 +9,14 @@ C'est l'énoncé.*
 ```bash
 git clone https://github.com/acherm/cpoo2-etd.git
 cd cpoo2-etd
-mvn test                                    # rouge : normal
-mvn test -Dmaven.test.failure.ignore=true   # rouge, mais le tableau complet s'affiche
-mvn test -Dtest=InjectorTest                # une seule suite
+# rouge : normal
+mvn test
+# rouge, mais le tableau complet s'affiche
+mvn test -Dmaven.test.failure.ignore=true
+# une seule suite
+mvn test -Dtest=InjectorTest
+# tout un paquet, ici la partie 0 de S01 (les guillemets protègent l'étoile)
+mvn test -Dtest='**/echauffement/*'
 ```
 
 Java 21. Aucune dépendance en dehors de JUnit 5 et Mockito : le premier
@@ -20,14 +25,15 @@ Pas de Spring, pas de JavaFX, rien à installer d'autre qu'un JDK.
 
 ## État de référence
 
-Sur un clone intact — JDK 21, vérifié le 2026-08-25 :
+Sur un clone intact — JDK 21, vérifié le 2026-09-08 :
 
 ```
-Tests run: 63, Failures: 28, Errors: 12   →  40 rouges, 23 verts
+Tests run: 84, Failures: 33, Errors: 25   →  58 rouges, 26 verts
 ```
 
 | Suite | Séance | Tests | Rouges | Ce que les verts veulent dire |
 |---|---|---|---|---|
+| `PositionTest`, `EquipeTest`, `CoupsTest`, `ReglesTest` | S01 partie 0 | 21 | 18 | trois verts à vide : `toString` et `equals` engendrés par `record`, et `peek` (question 3.2) |
 | `MonOptionalTest` | S01 ex. 1 | 9 | 8 | le seul vert passe **à vide** |
 | `InjectorTest` | S01 ex. 2 | 12 | 6 | **six verts à vide** — c'est la question Q12 |
 | `FooTest` | S01 ex. 3 | 1 | 1 | |
@@ -37,15 +43,17 @@ Tests run: 63, Failures: 28, Errors: 12   →  40 rouges, 23 verts
 | `CollectionsTest` | S02 ex. 6 | 6 | 5 | |
 | `VisiteursTest` | S03 | 5 | 5 | |
 
-**Un test vert ne prouve pas toujours quelque chose.** Vingt-trois de ces
-soixante-trois tests passent sur du code qui ne fait rien. Savoir lesquels, et
+**Un test vert ne prouve pas toujours quelque chose.** Vingt-six de ces
+quatre-vingt-quatre tests passent sur du code qui ne fait rien. Savoir lesquels, et
 pourquoi, fait partie du travail (S01 Q12–Q13).
 
 ## Carte des exercices
 
 ```
 src/main/java/cpoo2/
-  s01/optionnel/     MonOptional             ← reconstruire Optional
+  s01/echauffement/  Position, Equipe, Coup…, Coups, Regles, Variance
+                                             ← partie 0 : record, sealed, lambdas, variance
+     /optionnel/     MonOptional             ← reconstruire Optional
      /injection/     Inject, Injector        ← réflexion, annotations, cycles
      /testabilite/   Foo, RandomGenerator    ← l'instance unique casse le test
   s02/enumeration/   ColourCard              ← fabrique depuis une chaîne
@@ -63,14 +71,15 @@ src/main/java/cpoo2/
         /questions/  Q1                      ← à exécuter : getOrDefault et le NPE
 ```
 
-Trois classes se **lancent** au lieu de se tester — ce sont des expériences,
+Quatre classes se **lancent** au lieu de se tester — ce sont des expériences,
 leur sortie est la réponse :
 
 ```bash
 mvn -q compile
-java -cp target/classes cpoo2.s03.arbre.SurchargeDemo      # S03 Q6
-java -cp target/classes cpoo2.divers.journal.Journalisation # § 8
-java -cp target/classes cpoo2.divers.questions.Q1           # § 15
+java -cp target/classes cpoo2.s01.echauffement.Variance      # S01 partie 0, ex. 5
+java -cp target/classes cpoo2.s03.arbre.SurchargeDemo        # S03 Q6
+java -cp target/classes cpoo2.divers.journal.Journalisation  # § 8
+java -cp target/classes cpoo2.divers.questions.Q1            # § 15
 ```
 
 ## Deux exercices sans suite JUnit, et c'est voulu
