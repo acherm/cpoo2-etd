@@ -9,6 +9,13 @@ package cpoo2.s01.injection;
  * d'erreur. À vous de trouver la ligne manquante et d'expliquer pourquoi son
  * oubli est <i>silencieux</i>.
  *
+ * <p>Une annotation a trois faces. On la <b>pose</b> : {@code @Inject B b;}
+ * dans les classes de {@code InjectorTest}, comme {@code @Test} sur une
+ * méthode. Quelqu'un la <b>lit</b> : votre {@link Injector}, par
+ * {@code f.isAnnotationPresent(Inject.class)}, comme JUnit lit {@code @Test}.
+ * Et on la <b>déclare</b> : c'est ce fichier. Une annotation ne fait rien par
+ * elle-même ; elle est inerte tant que personne ne la lit.
+ *
  * <p>Indice : par défaut, une annotation Java n'est pas conservée pour être
  * lue à l'exécution.
  */

@@ -14,8 +14,13 @@ package cpoo2.s01.optionnel;
  * et le champ qui porte la valeur est {@code private final}.
  *
  * <p>La méthode {@code map} n'est volontairement pas déclarée ici : c'est la
- * question Q3 d'en trouver la signature exacte. Quand vous l'aurez écrite,
- * décommentez {@code MonOptionalMapTest}.
+ * question Q3 d'en <b>déduire</b> la signature exacte, sans assistant. Vos
+ * trois sources, dans l'ordre : (1) l'usage ci-dessus, où l'on rappelle
+ * {@code orElse} sur ce que {@code map} renvoie ; (2) la première ligne de
+ * {@code MonOptionalMapTest} (en commentaire, dans {@code src/test/java/...}),
+ * qui fixe le type du paramètre et celui du retour ; (3) le compilateur, une
+ * fois le test décommenté. Quand vous l'aurez écrite, décommentez
+ * {@code MonOptionalMapTest}.
  */
 public final class MonOptional<T> {
 
@@ -48,5 +53,6 @@ public final class MonOptional<T> {
 		return null;
 	}
 
-	// TODO Q3 : map. Quelle signature ? Que renvoie-t-elle si la fonction rend null ?
+	// TODO Q3 : map. Quelle signature ? (déduisez-la de l'usage et de MonOptionalMapTest,
+	// voir le commentaire de classe). Que renvoie-t-elle si la fonction rend null ?
 }
