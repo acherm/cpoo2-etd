@@ -23,7 +23,7 @@ public final class Exemples {
 
 	public static void neDoitPasCompiler(final RobotFactory factory) {
 		// Ces trois lignes doivent rester des erreurs de compilation.
-		// Q14' : dites lequel des trois est refusé par quel type.
+		// Q23' : dites lequel des trois est refusé par quel type.
 		//
 		// factory.newRobot().press(10, 20).press(30, 10);
 		// factory.newRobot().press(10, 20).click(30, 10);

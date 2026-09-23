@@ -3,7 +3,7 @@ package cpoo2.s02.annuler;
 import java.util.Optional;
 
 /**
- * S03 — exercice 3. Collecte les actions annulables et pilote annuler / refaire.
+ * Ancien exercice hors séance de S02, rattaché à S05 (Commande et Memento). Collecte les actions annulables et pilote annuler / refaire.
  *
  * <p>Toute la spécification est dans {@code UndoRedoHistoryTest} : quatorze
  * tests, tous rouges. Lisez-les avant d'écrire une ligne — c'est l'énoncé.

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** S03 ex. 6 — l'oracle. Le test qui compte est {@code emptyListEstPartagee}. */
+/** S02 ex. 8 — l'oracle. Le test qui compte est {@code emptyListEstPartagee}. */
 class CollectionsTest {
 
 	@Test

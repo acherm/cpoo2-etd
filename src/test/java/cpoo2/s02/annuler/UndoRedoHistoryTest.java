@@ -7,7 +7,7 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * S03 ex. 3 — l'oracle de {@link UndoRedoHistory}. Quatorze tests.
+ * S02 ex. 7, option C — l'oracle de {@link UndoRedoHistory}. Quatorze tests.
  *
  * <p>Notez comment les actions sont des <b>mocks</b> : on ne vérifie pas ce que
  * l'action fait, on vérifie que l'historique l'appelle au bon moment et le bon

@@ -1,7 +1,7 @@
 package cpoo2.s02.fluide;
 
 /**
- * S03 — exercice 5, option B. API fluide à états.
+ * Ancien exercice hors séance de S02, rattaché à S07 (le Monteur et sa descendance). API fluide à états.
  *
  * <p>Ici, <b>le compilateur est le test</b> : il n'y a pas de suite JUnit. Votre
  * solution est correcte quand les usages légitimes compilent et que les trois
@@ -11,6 +11,6 @@ package cpoo2.s02.fluide;
  * pas renvoyer le même type que {@code press(...)}.
  */
 public interface RobotFactory {
-	// TODO Q13' : quel type de retour ?
+	// TODO Q22' : quel type de retour ?
 	Object newRobot();
 }

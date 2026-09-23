@@ -1,7 +1,7 @@
 package cpoo2.s02.poidsmouche;
 
 /**
- * S03 — exercice 6. Deux méthodes à écrire. Elles se ressemblent, mais une
+ * Ancien exercice hors séance de S02, rattaché à S05 (Poids-mouche). Deux méthodes à écrire. Elles se ressemblent, mais une
  * seule des deux est un <b>poids-mouche</b> : à vous de dire laquelle, et
  * pourquoi l'autre ne peut pas l'être.
  */

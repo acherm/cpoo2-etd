@@ -1,14 +1,14 @@
 package cpoo2.s02.monteur;
 
 /**
- * S03 — exercice 5, option A. Monteurs fonctionnels.
+ * Ancien exercice hors séance de S02, rattaché à S07 (Monteur). Monteurs fonctionnels.
  *
  * <p>Valeurs par défaut imposées : {@code age = 1}, {@code hauteur = 1},
  * {@code feuilles = false}, {@code cones = 10}.
  *
- * <p>Q14 : le code du monteur de chênes seulement.
- * Q15 : créer un chêne de 10 ans, sans feuille.
- * Q16 : que change le mot « fonctionnel » ? Montrez-le avec un monteur
+ * <p>Q23 : le code du monteur de chênes seulement.
+ * Q24 : créer un chêne de 10 ans, sans feuille.
+ * Q25 : que change le mot « fonctionnel » ? Montrez-le avec un monteur
  * <b>partiellement configuré</b> que l'on réutilise deux fois.
  */
 public abstract class Arbre {

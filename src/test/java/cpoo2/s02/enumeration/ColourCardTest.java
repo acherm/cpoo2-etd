@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** S03 ex. 1 — l'oracle. Q3 : pourquoi l'absence est-elle une valeur de retour ? */
+/** S02 ex. 6 — l'oracle. Q21 : pourquoi l'absence est-elle une valeur de retour ? */
 class ColourCardTest {
 	@Test
 	void getNullReturnsEmpty() {

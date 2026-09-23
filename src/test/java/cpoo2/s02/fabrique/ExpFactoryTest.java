@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * S03 ex. 2 — filet de non-régression. Verte AVANT votre refactoring, elle doit
- * le rester APRÈS. Les quatre {@code assertNotSame} sont le cœur de la Q6 :
+ * S02 ex. 2 — filet de non-régression. Verte AVANT votre refactoring, elle doit
+ * le rester APRÈS. Les quatre {@code assertNotSame} sont le cœur de la Q8 :
  * une fabrique qui met les instances en cache les fait virer au rouge.
  */
 class ExpFactoryTest {

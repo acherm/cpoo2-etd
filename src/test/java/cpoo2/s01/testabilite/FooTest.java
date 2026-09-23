@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
- * S01 — exercice 3. Testabilité et instance unique.
+ * S01 — exercice 1 de S02. Testabilité et instance unique.
  *
  * <p>Je ne peux pas tester {@code getFooFoo} : il tire une valeur au hasard.
  * Refactorez {@link RandomGenerator} pour rendre {@link Foo} testable, puis
