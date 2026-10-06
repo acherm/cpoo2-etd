@@ -25,8 +25,7 @@ import java.util.Optional;
  *   avancerVersBallon
  * </pre>
  *
- * <p>TODO S05, Q12 : les deux conditions et les trois actions. Les outils du bas (le tir gagnant,
- * les coups légaux, la progression, la distance) sont fournis. Les conditions ne modifient rien. Les actions déposent le coup choisi sur le tableau noir
+ * <p>Les conditions ne modifient rien. Les actions déposent le coup choisi sur le tableau noir
  * et répondent {@code SUCCES}, ou {@code ECHEC} si aucun coup de ce genre n'est légal : le
  * Selecteur passe alors à la branche suivante. Le jeu est au tour par tour, {@code EN_COURS}
  * ne sert pas ici.</p>
@@ -64,25 +63,36 @@ public final class AdversaireBT {
 
     /** Ma porteuse a un tir légal dont la trajectoire est libre jusqu'à la ligne de fond. */
     static boolean ballonProcheBut(Contexte ctx) {
-        throw new UnsupportedOperationException("TODO S05 Q12 : ballonProcheBut");
+        return tirGagnant(ctx).isPresent();
     }
 
     static Statut tirer(Contexte ctx) {
-        throw new UnsupportedOperationException("TODO S05 Q12 : tirer");
+        return deposer(ctx, tirGagnant(ctx));
     }
 
     static boolean peutPasser(Contexte ctx) {
-        throw new UnsupportedOperationException("TODO S05 Q12 : peutPasser");
+        return !coupsLegaux(ctx.partie()).stream().filter(c -> c instanceof Coup.Passe).toList().isEmpty();
     }
 
     /** La passe qui rapproche le plus le ballon de la ligne de fond adverse. */
     static Statut passerAuMieux(Contexte ctx) {
-        throw new UnsupportedOperationException("TODO S05 Q12 : passerAuMieux");
+        Partie partie = ctx.partie();
+        Optional<Coup> meilleure = coupsLegaux(partie).stream()
+                .filter(c -> c instanceof Coup.Passe)
+                .max(Comparator.comparingInt(c -> progression(ctx.camp(), partie.plateau(), ((Coup.Passe) c).cible())));
+        return deposer(ctx, meilleure);
     }
 
     /** Le déplacement qui rapproche le plus une de mes pièces du ballon. */
     static Statut avancerVersBallon(Contexte ctx) {
-        throw new UnsupportedOperationException("TODO S05 Q12 : avancerVersBallon");
+        Partie partie = ctx.partie();
+        Plateau plateau = partie.plateau();
+        Position ballon = plateau.positionDuBallon().orElse(null);
+        List<Coup> deplacements = coupsLegaux(partie).stream().filter(c -> c instanceof Coup.Deplacement).toList();
+        if (deplacements.isEmpty()) return Statut.ECHEC;
+        Comparator<Coup> plusPres = Comparator.comparingInt(c -> ballon == null
+                ? 0 : distance(((Coup.Deplacement) c).vers(), ballon));
+        return deposer(ctx, deplacements.stream().min(plusPres));
     }
 
     // ---------- outils ----------

@@ -1,26 +1,21 @@
 package chessball;
 
-/**
- * S04, exercice 5, Q15 : un abonné qui compte les coups acceptés et les coups refusés,
- * à part, et les buts.
- *
- * <p>TODO Q15.</p>
- */
+/** Un abonné de la partie (fourni : l'Observateur s'écrit en S04 sur le jeu de la boîte) : acceptés, refusés et buts, comptés à part. */
 public final class CompteurDeCoups implements EcouteurDePartie {
 
+    private int acceptes;
+    private int refuses;
+    private int buts;
+
     @Override public void surCoupTente(Coup coup, Verdict verdict) {
-        throw new UnsupportedOperationException("TODO Q15");
+        if (verdict.accepte()) acceptes++; else refuses++;
     }
 
-    public int acceptes() {
-        throw new UnsupportedOperationException("TODO Q15");
-    }
+    @Override public void surBut(Couleur marqueur) { buts++; }
 
-    public int refuses() {
-        throw new UnsupportedOperationException("TODO Q15");
-    }
+    public int acceptes() { return acceptes; }
 
-    public int buts() {
-        throw new UnsupportedOperationException("TODO Q15");
-    }
+    public int refuses() { return refuses; }
+
+    public int buts() { return buts; }
 }

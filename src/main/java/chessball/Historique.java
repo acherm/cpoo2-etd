@@ -9,9 +9,7 @@ import java.util.List;
 /**
  * Le gardien : il fait jouer la partie, garde une sauvegarde avant chaque coup accepté, et sait
  * revenir en arrière. Il détient des {@link Partie.Sauvegarde} qu'il ne peut pas lire : c'est
- * le Memento. Il tient aussi le carnet des coups joués par lui : l'invocateur de la Commande.
- *
- * <p>TODO S05, Q5 bis.</p>
+ * le Memento. Il tient aussi le carnet des coups joués par lui : c'est l'invocateur de la Commande.
  */
 public final class Historique {
 
@@ -25,12 +23,21 @@ public final class Historique {
 
     /** Sauvegarde, puis joue. Un coup refusé ne laisse rien derrière lui. */
     public Verdict jouer(Coup coup) {
-        throw new UnsupportedOperationException("TODO S05 Q5 bis");
+        Partie.Sauvegarde sauvegarde = partie.capturer();
+        Verdict verdict = partie.jouer(coup);
+        if (verdict.accepte()) {
+            avant.push(sauvegarde);
+            carnet.add(coup);
+        }
+        return verdict;
     }
 
     /** Revient à l'état d'avant le dernier coup joué par cet historique. Faux s'il n'y en a pas. */
     public boolean annuler() {
-        throw new UnsupportedOperationException("TODO S05 Q5 bis");
+        if (avant.isEmpty()) return false;
+        partie.restaurer(avant.pop());
+        carnet.remove(carnet.size() - 1);
+        return true;
     }
 
     /** Les coups joués par cet historique, dans l'ordre : un carnet rejouable. */

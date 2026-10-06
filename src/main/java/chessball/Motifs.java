@@ -1,31 +1,31 @@
 package chessball;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
- * Le motif de déplacement d'un type de pièce : la tour glisse en ligne, le fou en diagonale,
- * le cavalier saute, la dame fait les deux.
- *
- * <p><b>Version naïve, volontairement.</b> Chaque appel construit un motif <em>neuf</em> :
- * douze pièces sur le plateau, douze objets identiques deux à deux. Les motifs n'ont pourtant
- * aucun état propre à une pièce (la case de départ leur est passée en paramètre). La séance 5
- * en fera des objets partagés : c'est le patron Poids-mouche (S05, Q1 bis : une {@code EnumMap}
- * remplie une fois, {@code pour} rend toujours la même instance, {@code PoidsMoucheTest}).</p>
+ * Douze pièces sur le plateau, quatre comportements de déplacement. Un motif ne contient
+ * <em>aucune</em> donnée propre à une pièce (la case de départ lui est passée en paramètre) :
+ * il est partageable. Une instance par type, toujours la même : c'est le <b>Poids-mouche</b>.
  */
 public final class Motifs {
 
+    private static final Map<TypePiece, Motif> PARTAGES = new EnumMap<>(TypePiece.class);
+
+    static {
+        Motif tour = new MotifGlissant(Direction.lignes());
+        Motif fou = new MotifGlissant(Direction.diagonales());
+        PARTAGES.put(TypePiece.TOUR, tour);
+        PARTAGES.put(TypePiece.FOU, fou);
+        PARTAGES.put(TypePiece.CAVALIER, MotifSauteur.cavalier());
+        PARTAGES.put(TypePiece.DAME, new MotifCompose(tour, fou));
+    }
+
     private Motifs() {}
 
-    /** Un motif pour ce type. Aujourd'hui : une nouvelle instance à chaque appel. */
+    /** Toujours la même instance pour un type donné : l'état extrinsèque (la case) est un paramètre. */
     public static Motif pour(TypePiece type) {
-        return switch (type) {
-            case TOUR -> new MotifGlissant(Direction.lignes());
-            case FOU -> new MotifGlissant(Direction.diagonales());
-            case CAVALIER -> MotifSauteur.cavalier();
-            case DAME -> new MotifCompose(new MotifGlissant(Direction.lignes()),
-                    new MotifGlissant(Direction.diagonales()));
-        };
+        return PARTAGES.getOrDefault(type, MotifNul.INSTANCE);
     }
 
     /** Type lu dans un fichier de configuration : inconnu, la pièce existe mais ne bouge pas. */
@@ -41,9 +41,9 @@ public final class Motifs {
     }
 
     /** Toutes les directions de glissement, lignes puis diagonales : pratique pour la dame. */
-    static List<Direction> toutesLesDirections() {
-        List<Direction> toutes = new ArrayList<>(Direction.lignes());
+    static java.util.List<Direction> toutesLesDirections() {
+        java.util.List<Direction> toutes = new java.util.ArrayList<>(Direction.lignes());
         toutes.addAll(Direction.diagonales());
-        return List.copyOf(toutes);
+        return java.util.List.copyOf(toutes);
     }
 }
